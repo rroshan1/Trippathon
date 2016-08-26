@@ -47,7 +47,7 @@ public class AccessDal implements IMmtweetDal {
 	}
 
 	@Override
-	public boolean updateMessageLocation(int messageId, Location currentLocation, String lastUpdationTime) {
+	public boolean updateMessageLocation(int messageId, Location currentLocation, Long lastUpdationTime) {
 		// TODO Auto-generated method stub
 		return false;
 	}

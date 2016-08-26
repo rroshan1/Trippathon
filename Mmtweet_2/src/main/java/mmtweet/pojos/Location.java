@@ -33,4 +33,10 @@ public class Location {
 	{
 		return this.latlng;
 	}
+
+	@Override
+	public String toString() {
+		return "Location [latitude=" + latitude + ", longitude=" + longitude + "]";
+	}
+	
 }
