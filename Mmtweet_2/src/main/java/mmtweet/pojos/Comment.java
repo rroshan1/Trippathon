@@ -2,7 +2,7 @@ package mmtweet.pojos;
 
 public class Comment {
 	private String commentId;
-	private int userId;
+	private String userId;
 	private String text;
 	private Location originLocation;
 	private String creationTime;
@@ -13,10 +13,10 @@ public class Comment {
 	public void setCommentId(String commentId) {
 		this.commentId = commentId;
 	}
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	public String getText() {

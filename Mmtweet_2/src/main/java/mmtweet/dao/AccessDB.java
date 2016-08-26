@@ -40,7 +40,7 @@ public class AccessDB {
    }
 
    
-   public void addMessage(int userId, TweetMessage msg)
+   public void addMessage(String userId, TweetMessage msg)
    {
 	   String sql;
 	   try {
@@ -49,7 +49,7 @@ public class AccessDB {
 		   //sql += msg.getMessageId() + ",";
 		   if (userId != msg.getUserId())
 			   System.out.println("\nERROR: addMessage(): User id mismatch!! Roshan.\n");
-		   sql += msg.getUserId() + ",";
+		   sql += "'" + msg.getUserId() + "',";
 		   sql += "'" + msg.getText() + "',";
 		   sql += "'" + msg.getOriginLocation().getLatitude() + "',";
 		   sql += "'" + msg.getOriginLocation().getLongitude() + "',";
@@ -71,14 +71,14 @@ public class AccessDB {
    }
    
    
-   public void addComment(int userId, int messageId, Comment comment)
+   public void addComment(String userId, int messageId, Comment comment)
    {
 	   String sql;
 	   try {
 		   sql = "INSERT INTO comment (user_id, message_id, text, origin_loc_latitude, origin_loc_longitude, creation_time) VALUES (";
 		   if (userId != comment.getUserId())
 			   System.out.println("\nERROR: addComment(): User id mismatch!! Roshan.\n");
-		   sql += comment.getUserId() + ",";
+		   sql += "'" + comment.getUserId() + "',";
 		   sql += messageId + ",";
 		   sql += "'" + comment.getText() + "',";
 		   sql += "'" + comment.getOriginLocation().getLatitude() + "',";
@@ -96,12 +96,12 @@ public class AccessDB {
 	   }
    }
    
-   public List<TweetMessage> getMessagesByUserId(int userId)
+   public List<TweetMessage> getMessagesByUserId(String userId)
    {
 	   List<TweetMessage> msgList = new ArrayList<TweetMessage>();
 	   String sql;
 	   try {
-		   sql = "SELECT * FROM message WHERE user_id=" + userId + ";";
+		   sql = "SELECT * FROM message WHERE user_id='" + userId + "';";
 		   ResultSet rs = stmt.executeQuery(sql);
 		   TweetMessage msg = new TweetMessage();
 		   while(rs.next()){
@@ -129,14 +129,14 @@ public class AccessDB {
    }
    
 
-   public List<TweetMessage> getCommentedMessagesByUserId(int userId)
+   public List<TweetMessage> getCommentedMessagesByUserId(String userId)
    {
 	   List<TweetMessage> msgList = new ArrayList<TweetMessage>();
 	   String sql, inner_sql;
 	   ResultSet inner_rs;
 	   
 	   try {
-		   sql = "SELECT message_id FROM comment WHERE user_id=" + userId + ";";
+		   sql = "SELECT message_id FROM comment WHERE user_id='" + userId + "';";
 		   ResultSet rs = stmt.executeQuery(sql);
 		   TweetMessage msg = new TweetMessage();
 		   while(rs.next()){

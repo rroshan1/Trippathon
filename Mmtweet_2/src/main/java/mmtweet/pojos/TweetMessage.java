@@ -4,7 +4,7 @@ import java.util.List;
 
 public class TweetMessage {
 	private int messageId;
-	private int userId;
+	private String userId;
 	private String text;
 	private Location originLocation;
 	private Location currentLocation;
@@ -21,10 +21,10 @@ public class TweetMessage {
 	public void setMessageId(int messageId) {
 		this.messageId = messageId;
 	}
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	public String getText() {

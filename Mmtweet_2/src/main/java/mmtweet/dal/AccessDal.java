@@ -16,7 +16,7 @@ public class AccessDal implements IMmtweetDal {
 	}
 
 	@Override
-	public boolean addComment(String userId, String messageId, Comment comment) {
+	public boolean addComment(String userId, int messageId, Comment comment) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -47,7 +47,7 @@ public class AccessDal implements IMmtweetDal {
 	}
 
 	@Override
-	public boolean updateMessageLocation(int messageId, Location currentLocation, String lastUpdationTime) {
+	public boolean updateMessageLocation(int messageId, Location currentLocation, long lastUpdationTime) {
 		// TODO Auto-generated method stub
 		return false;
 	}

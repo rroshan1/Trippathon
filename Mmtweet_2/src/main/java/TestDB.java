@@ -14,24 +14,24 @@ public class TestDB {
 	
 		db.init();
 		/*TweetMessage msg= new TweetMessage();
-		msg.setUserId(2);
+		msg.setUserId("rakesh");
 		msg.setText("Goodbye!!");
 		msg.setOriginLocation(loc1);
 		msg.setViews(0);
 		msg.setPinned(false);
 		msg.setCreationTime("27/08/2016 9 pm");
-		db.addMessage(2, msg);*/
+		db.addMessage("rakesh", msg);*/
 		
 		/*Comment cmnt = new Comment();
-		cmnt.setUserId(1);
+		cmnt.setUserId("rakesh");
 		cmnt.setText("Comment Automated");
 		cmnt.setCreationTime("Cr1 ");
 		cmnt.setOriginLocation(loc1);
-		db.addComment(1, 5, cmnt);*/
+		db.addComment("rakesh", 5, cmnt);*/
 		
 		//db.getMessagesByUserId(2);
 		
-		db.getCommentedMessagesByUserId(3);
+		db.getCommentedMessagesByUserId("rakesh");
 		db.destroy();
 		}catch(Exception e)
 		{
