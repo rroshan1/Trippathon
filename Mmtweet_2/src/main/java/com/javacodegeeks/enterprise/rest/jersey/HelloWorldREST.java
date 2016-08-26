@@ -60,7 +60,7 @@ public class HelloWorldREST {
 	        if (request != null && request.getUserId() != null && request.getMessage() != null)
 	        {
 	        	TweetMessage message = request.getMessage();
-	        	if (message.isPinned())
+	        	if (message.getPinned())
 	        		message.setCurrentLocation(message.getOriginLocation());
 	            status = dal.addMessage(request.getUserId(), request.getMessage());
 	        }
