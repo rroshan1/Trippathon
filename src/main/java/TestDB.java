@@ -1,6 +1,7 @@
 import java.sql.SQLException;
 
 import mmtweet.dao.AccessDB;
+import mmtweet.pojos.Comment;
 import mmtweet.pojos.TweetMessage;;
 public class TestDB {
 
@@ -9,14 +10,15 @@ public class TestDB {
 		try{
 		AccessDB db = new AccessDB();
 		db.init();
-		TweetMessage msg= new TweetMessage();
+		/*TweetMessage msg= new TweetMessage();
 		msg.setUserId(2);
 		msg.setText("Goodbye!!");
 		msg.setOriginLocation("abc");
 		msg.setViews(0);
 		msg.setPinned(false);
 		msg.setCreationTime("27/08/2016 9 pm");
-		db.addMessage(2, msg);
+		db.addMessage(2, msg);*/
+		Comment cmnt = new Comment();
 		db.destroy();
 		}catch(Exception e)
 		{
