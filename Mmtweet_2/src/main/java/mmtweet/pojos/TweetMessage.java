@@ -4,9 +4,11 @@ import java.util.List;
 
 public class TweetMessage {
 	private int messageId;
+	private int userId;
 	private String text;
 	private Location originLocation;
 	private Location currentLocation;
+	private int views;
 	private List<Comment> commentList;
 	private boolean isPinned;
 	private String creationTime;
@@ -18,6 +20,12 @@ public class TweetMessage {
 	public void setMessageId(int messageId) {
 		this.messageId = messageId;
 	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 	public String getText() {
 		return text;
 	}
@@ -27,7 +35,7 @@ public class TweetMessage {
 	public Location getOriginLocation() {
 		return originLocation;
 	}
-	public void setOriginalLocation(Location originLocation) {
+	public void setOriginLocation(Location originLocation) {
 		this.originLocation = originLocation;
 	}
 	public Location getCurrentLocation() {
@@ -36,13 +44,19 @@ public class TweetMessage {
 	public void setCurrentLocation(Location currentLocation) {
 		this.currentLocation = currentLocation;
 	}
+	public int getViews() {
+		return views;
+	}
+	public void setViews(int views) {
+		this.views = views;
+	}
 	public List<Comment> getCommentList() {
 		return commentList;
 	}
 	public void setCommentList(List<Comment> commentList) {
 		this.commentList = commentList;
 	}
-	public boolean isPinned() {
+	public boolean getPinned() {
 		return isPinned;
 	}
 	public void setPinned(boolean isPinned) {
@@ -59,5 +73,15 @@ public class TweetMessage {
 	}
 	public void setFlightNumber(String flightNumber) {
 		this.flightNumber = flightNumber;
+	}
+	
+	//TODO: Remove the following 2 functions. Present for compilation error fix.
+	public void setOriginLocation(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setCurrentLocation(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 }

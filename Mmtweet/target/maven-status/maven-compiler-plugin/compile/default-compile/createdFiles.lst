@@ -1,0 +1,16 @@
+mmtweet\dal\IMmtweetDal.class
+mmtweet\pojos\vo\GetLiveMessagesRequest.class
+mmtweet\pojos\vo\BaseResponse.class
+mmtweet\pojos\Location.class
+mmtweet\webservices\MMTweetController.class
+mmtweet\pojos\vo\GetLiveMessagesResponse.class
+mmtweet\dao\AccessDB.class
+mmtweet\pojos\vo\GetMyMessagesRequest.class
+mmtweet\pojos\vo\GetMyCommentsResponse.class
+mmtweet\pojos\TweetMessage.class
+mmtweet\pojos\vo\DoCommentRequest.class
+mmtweet\pojos\vo\GetMyCommentsRequest.class
+mmtweet\pojos\Comment.class
+mmtweet\webservices\MmtweetRest.class
+mmtweet\pojos\vo\GetMyMessagesResponse.class
+mmtweet\pojos\vo\SendMessageRequest.class

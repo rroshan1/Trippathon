@@ -16,6 +16,7 @@ public class AccessDB {
    static final String PASS = "root@123";
    Connection conn = null;
    Statement stmt = null;
+   Statement stmt2 = null;
    
    public void init() {
 	   try{
@@ -26,6 +27,7 @@ public class AccessDB {
 	
 	      System.out.println("Creating statement...");
 	      stmt = conn.createStatement();
+	      stmt2 = conn.createStatement();
 	      
 	   }catch(SQLException se){
 	      //Handle errors for JDBC
@@ -71,7 +73,7 @@ public class AccessDB {
    {
 	   String sql;
 	   try {
-		   sql = "INSERT INTO comment (user_id, message_id, text, current_location, creation_time) VALUES (";
+		   sql = "INSERT INTO comment (user_id, message_id, text, origin_location, creation_time) VALUES (";
 		   if (userId != comment.getUserId())
 			   System.out.println("\nERROR: addComment(): User id mismatch!! Roshan.\n");
 		   sql += comment.getUserId() + ",";
@@ -129,24 +131,26 @@ public class AccessDB {
 	   List<TweetMessage> msgList = new ArrayList<TweetMessage>();
 	   String sql, inner_sql;
 	   ResultSet inner_rs;
+	   
 	   try {
 		   sql = "SELECT message_id FROM comment WHERE user_id=" + userId + ";";
 		   ResultSet rs = stmt.executeQuery(sql);
 		   TweetMessage msg = new TweetMessage();
 		   while(rs.next()){
 			   inner_sql = "SELECT * FROM message WHERE message_id=" + rs.getInt("message_id") + ";";
-			   inner_rs = stmt.executeQuery(inner_sql);
+			   inner_rs = stmt2.executeQuery(inner_sql);
 			   //Retrieve by column name
-			   msg.setMessageId(inner_rs.getInt("message_id"));
-			   msg.setText(inner_rs.getString("text"));
-			   msg.setOriginLocation(inner_rs.getString("origin_location"));
-			   msg.setCurrentLocation(inner_rs.getString("current_location"));
-			   msg.setViews(inner_rs.getInt("views"));
-			   //TBD: Add for list of comments
-			   msg.setPinned(inner_rs.getBoolean("is_pinned"));
-			   msg.setCreationTime(inner_rs.getString("creation_time"));
-			   msg.setFlightNumber(inner_rs.getString("flight_number"));
-			   
+			   while(inner_rs.next()){
+				   msg.setMessageId(inner_rs.getInt("message_id"));
+				   msg.setText(inner_rs.getString("text"));
+				   msg.setOriginLocation(inner_rs.getString("origin_location"));
+				   msg.setCurrentLocation(inner_rs.getString("current_location"));
+				   msg.setViews(inner_rs.getInt("views"));
+				   //TBD: Add for list of comments
+				   msg.setPinned(inner_rs.getBoolean("is_pinned"));
+				   msg.setCreationTime(inner_rs.getString("creation_time"));
+				   msg.setFlightNumber(inner_rs.getString("flight_number"));
+			   }
 			   msgList.add(msg);
 		   }
 	   }catch(SQLException se){
@@ -163,6 +167,7 @@ public class AccessDB {
    public void destroy() {
 	   try{
 	      stmt.close();
+	      stmt2.close();
 	      conn.close();
 	   }catch(SQLException se){
 	      //Handle errors for JDBC
