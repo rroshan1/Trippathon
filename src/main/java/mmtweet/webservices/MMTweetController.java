@@ -16,7 +16,6 @@ import mmtweet.pojos.vo.GetMyMessagesRequest;
 import mmtweet.pojos.vo.GetMyMessagesResponse;
 import mmtweet.pojos.vo.SendMessageRequest;
 
-
 @Controller
 public class MMTweetController {
 	@RequestMapping(value = "/sendMessage", method = RequestMethod.POST)
