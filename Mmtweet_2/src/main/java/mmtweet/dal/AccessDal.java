@@ -6,31 +6,37 @@ import java.util.List;
 import mmtweet.pojos.Comment;
 import mmtweet.pojos.Location;
 import mmtweet.pojos.TweetMessage;
+import mmtweet.dao.AccessDB;
 
 public class AccessDal implements IMmtweetDal {
 
+	private AccessDB db;
+	public AccessDal() {
+		// TODO Auto-generated constructor stub
+		db = new AccessDB();
+		db.init();
+	}
+	
 	@Override
 	public boolean addMessage(String userId, TweetMessage message) {
-		// TODO Auto-generated method stub
-		return false;
+		db.addMessage(userId, message);
+		return true;
 	}
 
 	@Override
 	public boolean addComment(String userId, int messageId, Comment comment) {
-		// TODO Auto-generated method stub
-		return false;
+		db.addComment(userId, messageId, comment);
+		return true;
 	}
 
 	@Override
 	public List<TweetMessage> getMessagesByUserId(String userId) {
-		// TODO Auto-generated method stub
-		return new ArrayList<>();
+		return db.getMessagesByUserId(userId);
 	}
 
 	@Override
 	public List<TweetMessage> getCommentedMessagesByUserId(String userId) {
-		// TODO Auto-generated method stub
-		return new ArrayList<>();
+		return db.getCommentedMessagesByUserId(userId);
 	}
 
 	@Override
@@ -52,4 +58,7 @@ public class AccessDal implements IMmtweetDal {
 		return false;
 	}
 
+	protected void finalize() throws Throwable{
+		db.destroy();
+	}
 }
