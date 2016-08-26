@@ -3,6 +3,7 @@
   <groupId>com.mmt.trippathon</groupId>
   <artifactId>mmtweet</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
 
 	<properties>
 		<org.springframework-version>4.0.5.RELEASE</org.springframework-version>
