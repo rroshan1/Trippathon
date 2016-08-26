@@ -40,22 +40,21 @@ public class AccessDal implements IMmtweetDal {
 	}
 
 	@Override
-	public List<TweetMessage> getMessagesByLatLongWindow(double minLatitude, double maxLatitude, double leftLongitude,
-			double rightLongitude) {
-		// TODO Auto-generated method stub
-		return new ArrayList<>();
+	public List<TweetMessage> getMessagesByLatLongWindow(double minLatitude, double maxLatitude, double leftLongitude, double rightLongitude) 
+	{
+		
+		
 	}
 
 	@Override
 	public List<TweetMessage> getAllMessages(boolean isPinned) {
-		// TODO Auto-generated method stub
-		return new ArrayList<>();
+		return db.getAllMessages(isPinned);
 	}
 
 	@Override
 	public boolean updateMessageLocation(int messageId, Location currentLocation, long lastUpdationTime) {
-		// TODO Auto-generated method stub
-		return false;
+		db.updateMessageLocation(messageId, currentLocation, lastUpdationTime);
+		return true;
 	}
 
 	protected void finalize() throws Throwable{

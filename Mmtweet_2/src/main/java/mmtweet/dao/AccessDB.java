@@ -166,8 +166,96 @@ public class AccessDB {
 	   return msgList;   
    }
    
+   public List<TweetMessage> getAllMessages(boolean isPinned) 
+   {
+	   List<TweetMessage> msgList = new ArrayList<TweetMessage>();
+	   String sql;
+	   try {
+		   sql = "SELECT * FROM message WHERE isPinned=" + is_pinned + ";";
+		   ResultSet rs = stmt.executeQuery(sql);
+		   TweetMessage msg = new TweetMessage();
+		   while(rs.next()){
+			   //Retrieve by column name
+			   msg.setMessageId(rs.getInt("message_id"));
+			   msg.setText(rs.getString("text"));
+			   msg.setOriginLocation(new Location(rs.getFloat("origin_loc_latitude"), rs.getFloat("origin_loc_longitude")));
+			   msg.setCurrentLocation(new Location(rs.getFloat("current_loc_latitude"), rs.getFloat("current_loc_longitude")));
+			   msg.setViews(rs.getInt("views"));
+			   //TBD: Add for list of comments
+			   msg.setPinned(rs.getBoolean("is_pinned"));
+			   msg.setCreationTime(rs.getString("creation_time"));
+			   msg.setFlightNumber(rs.getString("flight_number"));
+			   
+			   msgList.add(msg);
+		   }
+	   }catch(SQLException se){
+	      //Handle errors for JDBC
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      //Handle errors for Class.forName
+	      e.printStackTrace();
+	   }
+	   return msgList;
+	   
+   }
    
-   public void destroy() {
+   
+   public void updateMessageLocation(int messageId, Location currentLocation, long lastUpdationTime) 
+   {
+	   String sql;
+	   try {
+		   sql = "UPDATE message SET current_loc_latitude='" + currentLocation.getLatitude() + 
+				   "', current_loc_longitude='" + currentLocation.getLongitude() + 
+				   "', last_updated=" + lastUpdationTime + 
+				   " WHERE message_id=" + messageId + ";";
+		   
+		   stmt.executeUpdate(sql);
+	   }catch(SQLException se){
+	      //Handle errors for JDBC
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      //Handle errors for Class.forName
+	      e.printStackTrace();
+	   }
+   }
+   
+   
+   public List<TweetMessage> getMessagesByLatLongWindow(double minLatitude, double maxLatitude, double leftLongitude, double rightLongitude)
+   {
+	   List<TweetMessage> msgList = new ArrayList<TweetMessage>();
+	   String sql;
+	   try {
+		   sql = "SELECT * FROM message WHERE isPinned=" + is_pinned + ";";		//TBD: GEETIKA
+		   ResultSet rs = stmt.executeQuery(sql);
+		   TweetMessage msg = new TweetMessage();
+		   while(rs.next()){
+			   //Retrieve by column name
+			   msg.setMessageId(rs.getInt("message_id"));
+			   msg.setText(rs.getString("text"));
+			   msg.setOriginLocation(new Location(rs.getFloat("origin_loc_latitude"), rs.getFloat("origin_loc_longitude")));
+			   msg.setCurrentLocation(new Location(rs.getFloat("current_loc_latitude"), rs.getFloat("current_loc_longitude")));
+			   msg.setViews(rs.getInt("views"));
+			   //TBD: Add for list of comments
+			   msg.setPinned(rs.getBoolean("is_pinned"));
+			   msg.setCreationTime(rs.getString("creation_time"));
+			   msg.setFlightNumber(rs.getString("flight_number"));
+			   
+			   msgList.add(msg);
+		   }
+	   }catch(SQLException se){
+	      //Handle errors for JDBC
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      //Handle errors for Class.forName
+	      e.printStackTrace();
+	   }
+	   return msgList;
+	   
+   }
+   
+   
+   public void destroy() 
+   {
 	   try{
 	      stmt.close();
 	      stmt2.close();
