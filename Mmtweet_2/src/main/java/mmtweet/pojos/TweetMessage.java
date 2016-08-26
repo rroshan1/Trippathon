@@ -97,4 +97,13 @@ public class TweetMessage {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public String toString() {
+		return "TweetMessage [messageId=" + messageId + ", userId=" + userId + ", text=" + text + ", originLocation="
+				+ originLocation + ", currentLocation=" + currentLocation + ", views=" + views + ", commentList="
+				+ commentList + ", isPinned=" + isPinned + ", creationTime=" + creationTime + ", flightNumber="
+				+ flightNumber + ", lastUpdationTime=" + lastUpdationTime + "]";
+	}
+	
+	
 }

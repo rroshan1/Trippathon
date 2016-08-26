@@ -8,6 +8,8 @@ public class MmtweetConstants {
 	public static final double LIVE_MESSAGE_WINDOW_HEIGHT = 50;
 	public static final LengthUnit LIVE_MESSAGES_DISTANCE_UNIT = LengthUnit.METER;
 	
+	public static final int UPDATE_LOCATION_FREQUENCY = 60 * 1000;	//in millis	means 1 min
+	
 	public static double WIND_SPEED = 0.005; //unit meter/millisec means 5 meter / sec means 300 meter / min
 	public static WindDirection WIND_DIRECTION = WindDirection.N;
 	

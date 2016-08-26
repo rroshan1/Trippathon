@@ -1,5 +1,8 @@
 package com.javacodegeeks.enterprise.rest.jersey;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
@@ -21,6 +24,7 @@ import mmtweet.pojos.vo.GetMyCommentsResponse;
 import mmtweet.pojos.vo.GetMyMessagesResponse;
 import mmtweet.pojos.vo.SendMessageRequest;
 import mmtweet.webservices.GetLiveMessageService;
+import mmtweet.webservices.UpdateMessageLocationService;
 
 @Path("/helloWorldREST")
 @Produces(MediaType.APPLICATION_JSON)
@@ -30,6 +34,7 @@ public class HelloWorldREST {
     
     GetLiveMessageService getLiveMessageService = new GetLiveMessageService();
     IMmtweetDal dal = new AccessDal();
+    ExecutorService executorService = Executors.newSingleThreadExecutor();
     
 	@GET
 	@Path("/{parameter}")
@@ -101,5 +106,31 @@ public class HelloWorldREST {
 	        return response;
 	    }
 	    
+
+	    @GET
+	    @Path("/startUpdateLocationService")
+	    public BaseResponse startUpdateLocationService()
+	    {
+	    	if (executorService.isTerminated())
+	    	{
+	    		System.out.println("inside startUpdateLocationService; going to start UpdateMessageLocationService");
+	    		executorService.submit(new UpdateMessageLocationService());
+	    		return new BaseResponse(true);
+	    	}
+	    	return new BaseResponse(false);
+	    }
+
+	    @GET
+	    @Path("/stopUpdateLocationService")
+	    public BaseResponse stopUpdateLocationService()
+	    {
+	    	if (!executorService.isTerminated())
+	    	{
+	    		System.out.println("inside stopUpdateLocationService; going to shutdown");
+	    		executorService.shutdown();
+	    		return new BaseResponse(true);
+	    	}
+	    	return new BaseResponse(false);
+	    }
 
 }
