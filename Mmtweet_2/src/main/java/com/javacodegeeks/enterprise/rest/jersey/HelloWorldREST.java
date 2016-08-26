@@ -11,18 +11,24 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import mmtweet.dal.IMmtweetDal;
 import mmtweet.pojos.vo.BaseResponse;
 import mmtweet.pojos.vo.DoCommentRequest;
 import mmtweet.pojos.vo.GetLiveMessagesResponse;
 import mmtweet.pojos.vo.GetMyCommentsResponse;
 import mmtweet.pojos.vo.GetMyMessagesResponse;
 import mmtweet.pojos.vo.SendMessageRequest;
+import mmtweet.webservices.GetLiveMessageService;
 
 @Path("/helloWorldREST")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class HelloWorldREST {
 
+    
+    GetLiveMessageService getLiveMessageService = new GetLiveMessageService();
+    IMmtweetDal dal;
+    
 	@GET
 	@Path("/{parameter}")
 	public Response responseMsg( @PathParam("parameter") String parameter,
@@ -36,15 +42,25 @@ public class HelloWorldREST {
 	
 	  @GET
 	    @Path("/getMyMessages")
-	    public GetMyMessagesResponse getMyMessages(@QueryParam(value = "user") String request){
-	        return new GetMyMessagesResponse();
+	    public GetMyMessagesResponse getMyMessages(@QueryParam(value = "userid") String userid){
+	        GetMyMessagesResponse response = new GetMyMessagesResponse();
+	        if (userid != null)
+	        {
+	            response.setMessageList(dal.getMessagesByUserId(userid));
+	        }
+	        return response;
 	    }
 	  
 	  
 	  @POST
 	    @Path("/sendMessage")
 	    public BaseResponse sendMessage(SendMessageRequest request){
-	        return new BaseResponse(true);
+	        boolean status = false;
+	        if (request != null)
+	        {
+	            status = dal.addMessage(request.getUserId(), request.getMessage());
+	        }
+	        return new BaseResponse(status);
 	    }
 
 	  
@@ -52,30 +68,30 @@ public class HelloWorldREST {
 	    @POST
 	    @Path("/doComment")
 	    public BaseResponse doComment(DoCommentRequest request){
-	        return new BaseResponse(true);
+	        boolean status = false;
+	        if (request != null)
+	        {
+	            status = dal.addComment(request.getUserId(), request.getMessageId(), request.getComment());
+	        }
+	        return new BaseResponse(status);
 	    }
 
 	    
-	   /* @GET
-	    @Path("/getMyMessages")
-	    public GetMyMessagesResponse getMyMessages(@QueryParam(value = "user") String request){
-	        return new GetMyMessagesResponse();
-	    }*/
-
+	
 	 
 	    @GET
 	    @Path("/getLiveMessages")
-	    public GetLiveMessagesResponse getLiveMessages(@QueryParam(value = "location") String request){
-	        return new GetLiveMessagesResponse();
+	    public GetLiveMessagesResponse getLiveMessages(@QueryParam(value = "latitude") String latitude,@QueryParam(value = "longitude") String longitude){
+	        return getLiveMessageService.getLiveMessages(latitude,longitude);
 	    }
 	    
 	    @GET
 	    @Path("/getMyComments")
-	    public GetMyCommentsResponse getMyComments(@QueryParam(value = "userid") String request){
+	    public GetMyCommentsResponse getMyComments(@QueryParam(value = "userid") String userId){
 	        GetMyCommentsResponse response = new GetMyCommentsResponse();
-	        if (request != null)
+	        if (userId != null)
 	        {
-	           // response.setMessageList(dal.getCommentedMessagesByUserId(request.getUserId()));
+	            response.setMessageList(dal.getCommentedMessagesByUserId(userId));
 	        }
 	        return response;
 	    }
