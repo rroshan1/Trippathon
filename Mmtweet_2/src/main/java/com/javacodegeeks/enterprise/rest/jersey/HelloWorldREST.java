@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import mmtweet.dal.IMmtweetDal;
+import mmtweet.pojos.TweetMessage;
 import mmtweet.pojos.vo.BaseResponse;
 import mmtweet.pojos.vo.DoCommentRequest;
 import mmtweet.pojos.vo.GetLiveMessagesResponse;
@@ -56,8 +57,11 @@ public class HelloWorldREST {
 	    @Path("/sendMessage")
 	    public BaseResponse sendMessage(SendMessageRequest request){
 	        boolean status = false;
-	        if (request != null)
+	        if (request != null && request.getUserId() != null && request.getMessage() != null)
 	        {
+	        	TweetMessage message = request.getMessage();
+	        	if (message.isPinned())
+	        		message.setCurrentLocation(message.getOriginLocation());
 	            status = dal.addMessage(request.getUserId(), request.getMessage());
 	        }
 	        return new BaseResponse(status);
