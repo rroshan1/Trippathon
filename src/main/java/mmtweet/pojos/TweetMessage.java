@@ -74,14 +74,5 @@ public class TweetMessage {
 	public void setFlightNumber(String flightNumber) {
 		this.flightNumber = flightNumber;
 	}
-	
-	//TODO: Remove the following 2 functions. Present for compilation error fix.
-	public void setOriginLocation(String string) {
-		// TODO Auto-generated method stub
-		
-	}
-	public void setCurrentLocation(String string) {
-		// TODO Auto-generated method stub
-		
-	}
+
 }
