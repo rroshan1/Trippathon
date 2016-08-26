@@ -18,6 +18,8 @@ public class Location {
 	public Location(double latitude, double longitude)
 	{
 		latlng = new LatLng(latitude, longitude);
+		this.latitude = latitude;
+		this.longitude = longitude;
 	}
 
 	public double getLatitude() {

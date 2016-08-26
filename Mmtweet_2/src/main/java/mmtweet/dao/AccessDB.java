@@ -5,6 +5,7 @@ import java.util.List;
 
 import mmtweet.pojos.TweetMessage;
 import mmtweet.pojos.Comment;
+import mmtweet.pojos.Location;
 
 public class AccessDB {
    // JDBC driver name and database URL
@@ -43,15 +44,16 @@ public class AccessDB {
    {
 	   String sql;
 	   try {
-		   sql = "INSERT INTO message (user_id, text, origin_location, current_location, views, is_pinned, creation_time, flight_number) VALUES (";
+		   sql = "INSERT INTO message (user_id, text, origin_loc_latitude, origin_loc_longitude, views, is_pinned, creation_time, flight_number) VALUES (";
 		   
 		   //sql += msg.getMessageId() + ",";
 		   if (userId != msg.getUserId())
 			   System.out.println("\nERROR: addMessage(): User id mismatch!! Roshan.\n");
 		   sql += msg.getUserId() + ",";
 		   sql += "'" + msg.getText() + "',";
-		   sql += "'" + msg.getOriginLocation() + "',";
-		   sql += "'" + msg.getCurrentLocation() + "',";
+		   sql += "'" + msg.getOriginLocation().getLatitude() + "',";
+		   sql += "'" + msg.getOriginLocation().getLongitude() + "',";
+		   
 		   sql += msg.getViews() +  ",";
 	       sql += msg.getPinned() +  ",";	//CHECK
 	       sql += "'" + msg.getCreationTime() + "',";
@@ -73,13 +75,14 @@ public class AccessDB {
    {
 	   String sql;
 	   try {
-		   sql = "INSERT INTO comment (user_id, message_id, text, origin_location, creation_time) VALUES (";
+		   sql = "INSERT INTO comment (user_id, message_id, text, origin_loc_latitude, origin_loc_longitude, creation_time) VALUES (";
 		   if (userId != comment.getUserId())
 			   System.out.println("\nERROR: addComment(): User id mismatch!! Roshan.\n");
 		   sql += comment.getUserId() + ",";
 		   sql += messageId + ",";
 		   sql += "'" + comment.getText() + "',";
-		   sql += "'" + comment.getOriginLocation() + "',";
+		   sql += "'" + comment.getOriginLocation().getLatitude() + "',";
+		   sql += "'" + comment.getOriginLocation().getLongitude() + "',";
 	       sql += "'" + comment.getCreationTime() + "'";
 
 		   sql += ");";
@@ -105,8 +108,8 @@ public class AccessDB {
 			   //Retrieve by column name
 			   msg.setMessageId(rs.getInt("message_id"));
 			   msg.setText(rs.getString("text"));
-			   msg.setOriginLocation(rs.getString("origin_location"));
-			   msg.setCurrentLocation(rs.getString("current_location"));
+			   msg.setOriginLocation(new Location(rs.getFloat("origin_loc_latitude"), rs.getFloat("origin_loc_longitude")));
+			   msg.setCurrentLocation(new Location(rs.getFloat("current_loc_latitude"), rs.getFloat("current_loc_longitude")));
 			   msg.setViews(rs.getInt("views"));
 			   //TBD: Add for list of comments
 			   msg.setPinned(rs.getBoolean("is_pinned"));
@@ -143,8 +146,8 @@ public class AccessDB {
 			   while(inner_rs.next()){
 				   msg.setMessageId(inner_rs.getInt("message_id"));
 				   msg.setText(inner_rs.getString("text"));
-				   msg.setOriginLocation(inner_rs.getString("origin_location"));
-				   msg.setCurrentLocation(inner_rs.getString("current_location"));
+				   msg.setOriginLocation(new Location(inner_rs.getFloat("origin_loc_latitude"), inner_rs.getFloat("origin_loc_longitude")));
+				   msg.setCurrentLocation(new Location(inner_rs.getFloat("current_loc_latitude"), inner_rs.getFloat("current_loc_longitude")));
 				   msg.setViews(inner_rs.getInt("views"));
 				   //TBD: Add for list of comments
 				   msg.setPinned(inner_rs.getBoolean("is_pinned"));
