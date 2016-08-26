@@ -16,6 +16,8 @@ import javax.ws.rs.core.Response;
 
 import mmtweet.dal.AccessDal;
 import mmtweet.dal.IMmtweetDal;
+import mmtweet.pojos.Comment;
+import mmtweet.pojos.Location;
 import mmtweet.pojos.TweetMessage;
 import mmtweet.pojos.vo.BaseResponse;
 import mmtweet.pojos.vo.DoCommentRequest;
@@ -66,8 +68,13 @@ public class HelloWorldREST {
 	        if (request != null && request.getUserId() != null && request.getMessage() != null)
 	        {
 	        	TweetMessage message = request.getMessage();
-	        	if (message.getPinned())
-	        		message.setCurrentLocation(message.getOriginLocation());
+	        	if (message.getOriginLocation() == null)	//if location comes null, then set random location
+	        		message.setOriginLocation(new Location());
+        		message.setCurrentLocation(message.getOriginLocation());
+        		
+        		if (message.getCreationTimeLong() == 0)	// if creation time comes blank, set current time
+        			message.setCreationTime(System.currentTimeMillis());
+        		message.setLastUpdationTime(message.getCreationTimeLong());
 	            status = dal.addMessage(request.getUserId(), request.getMessage());
 	        }
 	        return new BaseResponse(status);
@@ -79,8 +86,11 @@ public class HelloWorldREST {
 	    @Path("/doComment")
 	    public BaseResponse doComment(DoCommentRequest request){
 	        boolean status = false;
-	        if (request != null)
+	        if (request != null && request.getComment() != null && request.getMessageId() > 0)
 	        {
+	        	Comment comment = request.getComment();
+	        	if (comment.getOriginLocation() == null)	//if location comes null, then set random location
+	        		comment.setOriginLocation(new Location());
 	            status = dal.addComment(request.getUserId(), request.getMessageId(), request.getComment());
 	        }
 	        return new BaseResponse(status);

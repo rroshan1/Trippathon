@@ -63,8 +63,18 @@ public class TweetMessage {
 	public void setPinned(boolean isPinned) {
 		this.isPinned = isPinned;
 	}
+	
+	public Long getCreationTimeLong()
+	{
+		return creationTime;
+	}
 	public String getCreationTime() {
 		return creationTime.toString();
+	}
+	
+	public void setCreationTime(Long creationTime)
+	{
+		this.creationTime = creationTime;
 	}
 	public void setCreationTime(String creationTime) {
 		try{
