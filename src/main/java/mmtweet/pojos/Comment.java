@@ -37,6 +37,10 @@ public class Comment {
 	public void setCreationTime(String creationTime) {
 		this.creationTime = creationTime;
 	}
+	public void setOriginLocation(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

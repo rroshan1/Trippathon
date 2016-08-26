@@ -18,7 +18,17 @@ public class TestDB {
 		msg.setPinned(false);
 		msg.setCreationTime("27/08/2016 9 pm");
 		db.addMessage(2, msg);*/
-		Comment cmnt = new Comment();
+		
+		/*Comment cmnt = new Comment();
+		cmnt.setUserId(4);
+		cmnt.setText("Comment");
+		cmnt.setCreationTime("Cr1 ");
+		cmnt.setOriginLocation("Loc1");
+		db.addComment(4, 5, cmnt);*/
+		
+		db.getMessagesByUserId(2);
+		
+		db.getCommentedMessagesByUserId(3);
 		db.destroy();
 		}catch(Exception e)
 		{
