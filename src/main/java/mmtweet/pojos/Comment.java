@@ -2,9 +2,9 @@ package mmtweet.pojos;
 
 public class Comment {
 	private String commentId;
-	private String userId;
+	private int userId;
 	private String text;
-	private Location originalLocation;
+	private Location originLocation;
 	private String creationTime;
 
 	public String getCommentId() {
@@ -13,10 +13,10 @@ public class Comment {
 	public void setCommentId(String commentId) {
 		this.commentId = commentId;
 	}
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 	public String getText() {
@@ -25,11 +25,11 @@ public class Comment {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public Location getOriginalLocation() {
-		return originalLocation;
+	public Location getOriginLocation() {
+		return originLocation;
 	}
-	public void setOriginalLocation(Location originalLocation) {
-		this.originalLocation = originalLocation;
+	public void setOriginLocation(Location originLocation) {
+		this.originLocation = originLocation;
 	}
 	public String getCreationTime() {
 		return creationTime;
