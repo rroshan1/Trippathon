@@ -21,6 +21,7 @@ import mmtweet.pojos.vo.SendMessageRequest;
 public class MMTweetController {
 	
 	IMmtweetDal dal;
+	GetLiveMessageService getLiveMessageService = new GetLiveMessageService();
 	
 	@RequestMapping(value = "/sendMessage", method = RequestMethod.POST)
 	@ResponseBody
@@ -69,7 +70,7 @@ public class MMTweetController {
 	@RequestMapping(value = "/getLiveMessages", method = RequestMethod.GET)
 	@ResponseBody
 	public GetLiveMessagesResponse getLiveMessages(@RequestBody GetLiveMessagesRequest request){
-		return new GetLiveMessagesResponse();
+		return getLiveMessageService.getLiveMessages(request);
 	}
 	
 }
