@@ -4,7 +4,7 @@ import mmtweet.pojos.Comment;
 
 public class DoCommentRequest {
 	private String userId;
-	private String messageId;
+	private int messageId;
 	private Comment comment;
 	
 	public String getUserId() {
@@ -13,10 +13,10 @@ public class DoCommentRequest {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getMessageId() {
+	public int getMessageId() {
 		return messageId;
 	}
-	public void setMessageId(String messageId) {
+	public void setMessageId(int messageId) {
 		this.messageId = messageId;
 	}
 	public Comment getComment() {
