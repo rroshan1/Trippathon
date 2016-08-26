@@ -3,19 +3,19 @@ package mmtweet.pojos;
 import java.util.List;
 
 public class TweetMessage {
-	private String messageId;
+	private int messageId;
 	private String text;
-	private Location originalLocation;
+	private Location originLocation;
 	private Location currentLocation;
 	private List<Comment> commentList;
 	private boolean isPinned;
 	private String creationTime;
 	private String flightNumber;
 
-	public String getMessageId() {
+	public int getMessageId() {
 		return messageId;
 	}
-	public void setMessageId(String messageId) {
+	public void setMessageId(int messageId) {
 		this.messageId = messageId;
 	}
 	public String getText() {
@@ -24,11 +24,11 @@ public class TweetMessage {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public Location getOriginalLocation() {
-		return originalLocation;
+	public Location getOriginLocation() {
+		return originLocation;
 	}
-	public void setOriginalLocation(Location originalLocation) {
-		this.originalLocation = originalLocation;
+	public void setOriginalLocation(Location originLocation) {
+		this.originLocation = originLocation;
 	}
 	public Location getCurrentLocation() {
 		return currentLocation;
