@@ -13,25 +13,27 @@ public class TestDB {
 		Location loc1 = new Location(12.123456, 24.123456);
 	
 		db.init();
+		
 		/*TweetMessage msg= new TweetMessage();
 		msg.setUserId("rakesh");
 		msg.setText("Goodbye!!");
 		msg.setOriginLocation(loc1);
+		msg.setCurrentLocation(loc1);
 		msg.setViews(0);
 		msg.setPinned(false);
-		msg.setCreationTime("27/08/2016 9 pm");
+		msg.setCreationTime((long)115);
 		db.addMessage("rakesh", msg);*/
 		
 		/*Comment cmnt = new Comment();
 		cmnt.setUserId("rakesh");
 		cmnt.setText("Comment Automated");
-		cmnt.setCreationTime("Cr1 ");
+		cmnt.setCreationTime("145 ");
 		cmnt.setOriginLocation(loc1);
-		db.addComment("rakesh", 5, cmnt);*/
+		db.addComment("rakesh", 3, cmnt);*/
 		
-		//db.getMessagesByUserId(2);
+		//db.getMessagesByUserId("roshan");
 		
-		db.getCommentedMessagesByUserId("rakesh");
+		db.getCommentedMessagesByUserId("vivek");
 		db.destroy();
 		}catch(Exception e)
 		{

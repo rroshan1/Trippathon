@@ -171,7 +171,7 @@ public class AccessDB {
 	   List<TweetMessage> msgList = new ArrayList<TweetMessage>();
 	   String sql;
 	   try {
-		   sql = "SELECT * FROM message WHERE isPinned=" + is_pinned + ";";
+		   sql = "SELECT * FROM message WHERE is_pinned=" + isPinned + ";";
 		   ResultSet rs = stmt.executeQuery(sql);
 		   TweetMessage msg = new TweetMessage();
 		   while(rs.next()){
