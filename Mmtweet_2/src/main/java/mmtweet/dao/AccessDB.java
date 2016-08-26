@@ -225,7 +225,12 @@ public class AccessDB {
 	   List<TweetMessage> msgList = new ArrayList<TweetMessage>();
 	   String sql;
 	   try {
-		   sql = "SELECT * FROM message WHERE isPinned=" + is_pinned + ";";		//TBD: GEETIKA
+//		   current_loc_latitude <= maxLatitude AND current_loc_latitude >= minLatitude AND   current_loc_longitude <= rightLongitude AND current_loc_longitude >= leftLongitude
+		   sql = "SELECT * FROM message WHERE "
+		   + "current_loc_latitude <= CAST('" + maxLatitude + "' AS DECIMAL(18, 6)) "
+		   + " AND current_loc_latitude >= CAST('" + minLatitude + "' AS DECIMAL(18, 6)) "
+		   + " AND current_loc_longitude <= CAST('" + rightLongitude + "' AS DECIMAL(18, 6)) "
+		   + " AND current_loc_longitude >= CAST('" + leftLongitude + "' AS DECIMAL(18, 6)) ";
 		   ResultSet rs = stmt.executeQuery(sql);
 		   TweetMessage msg = new TweetMessage();
 		   while(rs.next()){
