@@ -56,7 +56,7 @@ public class AccessDB {
 	       sql += "'" + msg.getFlightNumber() + "'";
 										   
 		   sql += ");";
-		   stmt.executeQuery(sql);
+		   stmt.executeUpdate(sql);
 	   }catch(SQLException se){
 	      //Handle errors for JDBC
 	      se.printStackTrace();
@@ -81,7 +81,7 @@ public class AccessDB {
 	       sql += "'" + comment.getCreationTime() + "'";
 
 		   sql += ");";
-		   stmt.executeQuery(sql);
+		   stmt.executeUpdate(sql);
 	   }catch(SQLException se){
 	      //Handle errors for JDBC
 	      se.printStackTrace();
