@@ -11,7 +11,9 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import mmtweet.dal.AccessDal;
 import mmtweet.dal.IMmtweetDal;
+import mmtweet.pojos.TweetMessage;
 import mmtweet.pojos.vo.BaseResponse;
 import mmtweet.pojos.vo.DoCommentRequest;
 import mmtweet.pojos.vo.GetLiveMessagesResponse;
@@ -27,7 +29,7 @@ public class HelloWorldREST {
 
     
     GetLiveMessageService getLiveMessageService = new GetLiveMessageService();
-    IMmtweetDal dal;
+    IMmtweetDal dal = new AccessDal();
     
 	@GET
 	@Path("/{parameter}")
@@ -56,8 +58,11 @@ public class HelloWorldREST {
 	    @Path("/sendMessage")
 	    public BaseResponse sendMessage(SendMessageRequest request){
 	        boolean status = false;
-	        if (request != null)
+	        if (request != null && request.getUserId() != null && request.getMessage() != null)
 	        {
+	        	TweetMessage message = request.getMessage();
+	        	if (message.getPinned())
+	        		message.setCurrentLocation(message.getOriginLocation());
 	            status = dal.addMessage(request.getUserId(), request.getMessage());
 	        }
 	        return new BaseResponse(status);

@@ -11,9 +11,10 @@ public class TweetMessage {
 	private int views;
 	private List<Comment> commentList;
 	private boolean isPinned;
-	private String creationTime;
+	private Long creationTime;
 	private String flightNumber;
-
+	private Long lastUpdationTime;
+	
 	public int getMessageId() {
 		return messageId;
 	}
@@ -63,10 +64,16 @@ public class TweetMessage {
 		this.isPinned = isPinned;
 	}
 	public String getCreationTime() {
-		return creationTime;
+		return creationTime.toString();
 	}
 	public void setCreationTime(String creationTime) {
-		this.creationTime = creationTime;
+		try{
+		this.creationTime = Long.parseLong(creationTime);
+		}
+		catch(Exception e)
+		{
+			this.creationTime = System.currentTimeMillis();
+		}
 	}
 	public String getFlightNumber() {
 		return flightNumber;
@@ -75,6 +82,12 @@ public class TweetMessage {
 		this.flightNumber = flightNumber;
 	}
 	
+	public Long getLastUpdationTime() {
+		return lastUpdationTime;
+	}
+	public void setLastUpdationTime(Long lastUpdationTime) {
+		this.lastUpdationTime = lastUpdationTime;
+	}
 	//TODO: Remove the following 2 functions. Present for compilation error fix.
 	public void setOriginLocation(String string) {
 		// TODO Auto-generated method stub
