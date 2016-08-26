@@ -42,8 +42,7 @@ public class AccessDal implements IMmtweetDal {
 	@Override
 	public List<TweetMessage> getMessagesByLatLongWindow(double minLatitude, double maxLatitude, double leftLongitude, double rightLongitude) 
 	{
-		
-		
+		return db.getMessagesByLatLongWindow(minLatitude, maxLatitude, leftLongitude, rightLongitude);
 	}
 
 	@Override
