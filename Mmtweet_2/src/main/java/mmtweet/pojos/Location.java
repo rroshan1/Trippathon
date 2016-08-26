@@ -1,20 +1,34 @@
 package mmtweet.pojos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.javadocmd.simplelatlng.LatLng;
+
 public class Location {
-	private int latitude;
-	private int longitude;
-	public int getLatitude() {
-		return latitude;
+	@JsonIgnore
+	private LatLng latlng;
+
+	private double latitude;
+	private double longitude;
+
+	public Location()
+	{
+		latlng = LatLng.random();
 	}
-	public void setLatitude(int latitude) {
-		this.latitude = latitude;
+
+	public Location(double latitude, double longitude)
+	{
+		latlng = new LatLng(latitude, longitude);
 	}
-	public int getLongitude() {
-		return longitude;
+
+	public double getLatitude() {
+		return this.latitude;
 	}
-	public void setLongitude(int longitude) {
-		this.longitude = longitude;
+	public double getLongitude() {
+		return this.longitude;
 	}
 	
-	
+	public LatLng getLatLng()
+	{
+		return this.latlng;
+	}
 }
