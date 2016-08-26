@@ -11,6 +11,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import mmtweet.dal.AccessDal;
 import mmtweet.dal.IMmtweetDal;
 import mmtweet.pojos.TweetMessage;
 import mmtweet.pojos.vo.BaseResponse;
@@ -28,7 +29,7 @@ public class HelloWorldREST {
 
     
     GetLiveMessageService getLiveMessageService = new GetLiveMessageService();
-    IMmtweetDal dal;
+    IMmtweetDal dal = new AccessDal();
     
 	@GET
 	@Path("/{parameter}")
