@@ -52,10 +52,10 @@ public class UpdateMessageLocationService implements Callable<String> {
 	{
 		Long currentTime = System.currentTimeMillis();
 		Long delta = currentTime - lastUpdationTime;
-		if ( delta < 0 )
+		if ( delta < 0 || lastUpdationTime.longValue() <= 0)
 		{
 			System.err.println("delta < 0; currentTime="+currentTime + ",lastUpdationTime="+lastUpdationTime);
-			return null;
+			return currentLocation;
 		}
 		double distance = delta * MmtweetConstants.WIND_SPEED;	//unit of distance will be meter
 
@@ -71,6 +71,7 @@ public class UpdateMessageLocationService implements Callable<String> {
 				|| MmtweetConstants.WIND_DIRECTION == MmtweetConstants.WindDirection.W)
 			deltaLng = distance;
 		
+		System.out.println("deltaLat="+deltaLat+",deltaLng="+deltaLng+",distance="+distance+",currentTime="+currentTime+",lastUpdationTime="+lastUpdationTime);
 		RectangularWindow window = new RectangularWindow(currentLocation.getLatLng(), deltaLat, deltaLng);
 		
 		//based on direction do get one corner of the rectangle
@@ -85,6 +86,7 @@ public class UpdateMessageLocationService implements Callable<String> {
 		else if (MmtweetConstants.WIND_DIRECTION == MmtweetConstants.WindDirection.W)
 			updatedLong = window.getLeftLongitude();
 
+		System.out.println("updatedLat="+updatedLat + ",updatedLong="+updatedLong);
 		return new Location(updatedLat, updatedLong);
 	}
 
