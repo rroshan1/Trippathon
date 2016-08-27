@@ -107,6 +107,7 @@ public class AccessDB {
 		   while(rs.next()){
 			   //Retrieve by column name
 			   msg.setMessageId(rs.getInt("message_id"));
+			   msg.setUserId(rs.getString("user_id"));
 			   msg.setText(rs.getString("text"));
 			   msg.setOriginLocation(new Location(rs.getFloat("origin_loc_latitude"), rs.getFloat("origin_loc_longitude")));
 			   msg.setCurrentLocation(new Location(rs.getFloat("current_loc_latitude"), rs.getFloat("current_loc_longitude")));
