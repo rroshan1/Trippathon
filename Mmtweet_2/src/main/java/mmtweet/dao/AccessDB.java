@@ -113,7 +113,7 @@ public class AccessDB {
 			   msg.setViews(rs.getInt("views"));
 			   //TBD: Add for list of comments
 			   msg.setPinned(rs.getBoolean("is_pinned"));
-			   msg.setCreationTime(rs.getString("creation_time"));
+			   msg.setCreationTime(rs.getLong("creation_time"));
 			   msg.setFlightNumber(rs.getString("flight_number"));
 			   
 			   msgList.add(msg);
@@ -151,7 +151,7 @@ public class AccessDB {
 				   msg.setViews(inner_rs.getInt("views"));
 				   //TBD: Add for list of comments
 				   msg.setPinned(inner_rs.getBoolean("is_pinned"));
-				   msg.setCreationTime(inner_rs.getString("creation_time"));
+				   msg.setCreationTime(inner_rs.getLong("creation_time"));
 				   msg.setFlightNumber(inner_rs.getString("flight_number"));
 			   }
 			   msgList.add(msg);
@@ -183,7 +183,7 @@ public class AccessDB {
 			   msg.setViews(rs.getInt("views"));
 			   //TBD: Add for list of comments
 			   msg.setPinned(rs.getBoolean("is_pinned"));
-			   msg.setCreationTime(rs.getString("creation_time"));
+			   msg.setCreationTime(rs.getLong("creation_time"));
 			   msg.setFlightNumber(rs.getString("flight_number"));
 			   
 			   msgList.add(msg);
@@ -242,7 +242,7 @@ public class AccessDB {
 			   msg.setViews(rs.getInt("views"));
 			   //TBD: Add for list of comments
 			   msg.setPinned(rs.getBoolean("is_pinned"));
-			   msg.setCreationTime(rs.getString("creation_time"));
+			   msg.setCreationTime(rs.getLong("creation_time"));
 			   msg.setFlightNumber(rs.getString("flight_number"));
 			   
 			   msgList.add(msg);

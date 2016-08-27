@@ -2,6 +2,8 @@ package mmtweet.pojos;
 
 import java.util.List;
 
+import mmtweet.pojos.vo.MmtweetConstants;
+
 public class TweetMessage {
 	private int messageId;
 	private String userId;
@@ -12,8 +14,10 @@ public class TweetMessage {
 	private List<Comment> commentList;
 	private boolean isPinned;
 	private Long creationTime;
+	private String creationTimeStr;
 	private String flightNumber;
 	private Long lastUpdationTime;
+	private String lastUpdationTimeStr;
 	
 	public int getMessageId() {
 		return messageId;
@@ -64,27 +68,6 @@ public class TweetMessage {
 		this.isPinned = isPinned;
 	}
 	
-	public Long getCreationTimeLong()
-	{
-		return creationTime;
-	}
-	public String getCreationTime() {
-		return creationTime.toString();
-	}
-	
-	public void setCreationTime(Long creationTime)
-	{
-		this.creationTime = creationTime;
-	}
-	public void setCreationTime(String creationTime) {
-		try{
-		this.creationTime = Long.parseLong(creationTime);
-		}
-		catch(Exception e)
-		{
-			this.creationTime = System.currentTimeMillis();
-		}
-	}
 	public String getFlightNumber() {
 		return flightNumber;
 	}
@@ -97,6 +80,27 @@ public class TweetMessage {
 	}
 	public void setLastUpdationTime(Long lastUpdationTime) {
 		this.lastUpdationTime = lastUpdationTime;
+		setLastUpdationTimeStr(MmtweetConstants.getDateInString(this.lastUpdationTime));
+	}
+	
+	public Long getCreationTime() {
+		return creationTime;
+	}
+	public void setCreationTime(Long creationTime) {
+		this.creationTime = creationTime;
+		setCreationTimeStr(MmtweetConstants.getDateInString(this.creationTime));
+	}
+	public String getCreationTimeStr() {
+		return creationTimeStr;
+	}
+	public void setCreationTimeStr(String creationTimeStr) {
+		this.creationTimeStr = creationTimeStr;
+	}
+	public String getLastUpdationTimeStr() {
+		return lastUpdationTimeStr;
+	}
+	public void setLastUpdationTimeStr(String lastUpdationTimeStr) {
+		this.lastUpdationTimeStr = lastUpdationTimeStr;
 	}
 	@Override
 	public String toString() {

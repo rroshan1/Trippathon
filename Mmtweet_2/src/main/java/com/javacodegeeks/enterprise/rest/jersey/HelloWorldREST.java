@@ -72,9 +72,9 @@ public class HelloWorldREST {
 	        		message.setOriginLocation(new Location());
         		message.setCurrentLocation(message.getOriginLocation());
         		
-        		if (message.getCreationTimeLong() == null)	// if creation time comes blank, set current time
+        		if (message.getCreationTime() == null || message.getCreationTime().longValue() == 0)	// if creation time comes blank, set current time
         			message.setCreationTime(System.currentTimeMillis());
-        		message.setLastUpdationTime(message.getCreationTimeLong());
+        		message.setLastUpdationTime(message.getCreationTime());
 	            status = dal.addMessage(request.getUserId(), request.getMessage());
 	        }
 	        return new BaseResponse(status);
