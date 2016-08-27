@@ -61,19 +61,19 @@ public class UpdateMessageLocationService implements Callable<String> {
 
 		//based on wind direction, find +deltaLat, +deltaLng, -deltaLat, -deltaLng
 		//create RectangularWindow
-		double deltaLat = 0;
-		double deltaLng = 0;
+		double deltaLat = 0;	//this is delta width
+		double deltaLng = 0;	// this is delta height
 		
 		if (MmtweetConstants.WIND_DIRECTION == MmtweetConstants.WindDirection.N 
 				|| MmtweetConstants.WIND_DIRECTION == MmtweetConstants.WindDirection.S)
-			deltaLat = distance;
+			deltaLat = distance*2;
 		else if (MmtweetConstants.WIND_DIRECTION == MmtweetConstants.WindDirection.E
 				|| MmtweetConstants.WIND_DIRECTION == MmtweetConstants.WindDirection.W)
-			deltaLng = distance;
+			deltaLng = distance*2;
 		
 		System.out.println("deltaLat="+deltaLat+",deltaLng="+deltaLng+",distance="+distance+",currentTime="+currentTime+",lastUpdationTime="+lastUpdationTime);
-		RectangularWindow window = new RectangularWindow(currentLocation.getLatLng(), deltaLat, deltaLng);
-		
+		RectangularWindow window = new RectangularWindow(currentLocation.getLatLng(), deltaLat, deltaLng, MmtweetConstants.LIVE_MESSAGES_DISTANCE_UNIT);
+
 		//based on direction do get one corner of the rectangle
 		double updatedLat = currentLocation.getLatitude();
 		double updatedLong = currentLocation.getLongitude();
