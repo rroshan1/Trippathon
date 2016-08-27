@@ -10,11 +10,37 @@ public class Location {
 	private double latitude;
 	private double longitude;
 
+	private String latitudeStr = "0";
+	private String longitudeStr = "0";
+	
 	public Location()
 	{
 		latlng = LatLng.random();
 	}
 
+	public Location(String latitudeStr, String longitudeStr)
+	{
+		try
+		{
+			this.latitudeStr = latitudeStr;
+			this.latitude = Double.parseDouble(latitudeStr);
+		}
+		catch (Exception e)
+		{
+			this.latitude = 0;
+		}
+		try
+		{
+			this.longitudeStr = longitudeStr;
+			this.longitude = Double.parseDouble(longitudeStr);
+		}
+		catch(Exception e)
+		{
+			this.longitude = 0;
+		}
+		latlng = new LatLng(latitude, longitude);
+	}
+	
 	public Location(double latitude, double longitude)
 	{
 		latlng = new LatLng(latitude, longitude);
