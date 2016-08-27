@@ -104,9 +104,10 @@ public class AccessDB {
 	   try {
 		   sql = "SELECT * FROM message WHERE user_id='" + userId + "';";
 		   ResultSet rs = stmt.executeQuery(sql);
-		   TweetMessage msg = new TweetMessage();
+		   TweetMessage msg = null;
 		   while(rs.next()){
 			   //Retrieve by column name
+			   msg = new TweetMessage();
 			   msg.setMessageId(rs.getInt("message_id"));
 			   msg.setUserId(rs.getString("user_id"));
 			   msg.setText(rs.getString("text"));
@@ -140,8 +141,9 @@ public class AccessDB {
 	   try {
 		   sql = "SELECT message_id FROM comment WHERE user_id='" + userId + "';";
 		   ResultSet rs = stmt.executeQuery(sql);
-		   TweetMessage msg = new TweetMessage();
+		   TweetMessage msg = null;
 		   while(rs.next()){
+			   msg = new TweetMessage();
 			   inner_sql = "SELECT * FROM message WHERE message_id=" + rs.getInt("message_id") + ";";
 			   inner_rs = stmt2.executeQuery(inner_sql);
 			   //Retrieve by column name
@@ -175,8 +177,9 @@ public class AccessDB {
 	   try {
 		   sql = "SELECT * FROM message WHERE is_pinned=" + isPinned + ";";
 		   ResultSet rs = stmt.executeQuery(sql);
-		   TweetMessage msg = new TweetMessage();
+		   TweetMessage msg = null;
 		   while(rs.next()){
+			   msg = new TweetMessage();
 			   //Retrieve by column name
 			   msg.setMessageId(rs.getInt("message_id"));
 			   msg.setText(rs.getString("text"));
@@ -235,8 +238,9 @@ public class AccessDB {
 		   + " AND current_loc_longitude <= CAST('" + rightLongitude + "' AS DECIMAL(18, 6)) "
 		   + " AND current_loc_longitude >= CAST('" + leftLongitude + "' AS DECIMAL(18, 6)); ";
 		   ResultSet rs = stmt.executeQuery(sql);
-		   TweetMessage msg = new TweetMessage();
+		   TweetMessage msg = null;
 		   while(rs.next()){
+			   msg = new TweetMessage();
 			   //Retrieve by column name
 			   msg.setMessageId(rs.getInt("message_id"));
 			   msg.setUserId(rs.getString("user_id"));
