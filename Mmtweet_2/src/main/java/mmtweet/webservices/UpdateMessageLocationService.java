@@ -1,6 +1,7 @@
 package mmtweet.webservices;
 
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.Callable;
 
 import com.javadocmd.simplelatlng.window.RectangularWindow;
@@ -87,8 +88,13 @@ public class UpdateMessageLocationService implements Callable<String> {
 		else if (MmtweetConstants.WIND_DIRECTION == MmtweetConstants.WindDirection.W)
 			updatedLong = window.getLeftLongitude();
 
-		updatedLat = currentLocation.getLatitude() * 1.00005;
-		updatedLong = currentLocation.getLongitude() * 1.00005;
+		Random rand = new Random();
+		int value = rand.nextInt(2);
+		float scale = 1.00005f;
+		if (value == 1)
+			scale = -1.00005f;
+		updatedLat = currentLocation.getLatitude() * scale;
+		updatedLong = currentLocation.getLongitude() * scale;
 		
 		System.out.println("updatedLat="+updatedLat + ",updatedLong="+updatedLong);
 		return new Location(updatedLat, updatedLong);
