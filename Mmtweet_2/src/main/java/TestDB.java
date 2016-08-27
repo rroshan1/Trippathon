@@ -33,7 +33,12 @@ public class TestDB {
 		
 		//db.getMessagesByUserId("roshan");
 		
-		db.getCommentedMessagesByUserId("vivek");
+		//db.getCommentedMessagesByUserId("vivek");
+		
+		//db.getAllMessages(false);
+		
+		//db.updateMessageLocation(3, loc1, 190);
+		
 		db.destroy();
 		}catch(Exception e)
 		{

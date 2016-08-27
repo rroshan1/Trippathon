@@ -10,11 +10,11 @@ import mmtweet.pojos.Location;
 public class AccessDB {
    // JDBC driver name and database URL
    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-   static final String DB_URL = "jdbc:mysql://localhost:3306/connector_new";
+   static final String DB_URL = "jdbc:mysql://localhost:3306/Trippathon";
 
    //  Database credentials
    static final String USER = "root";
-   static final String PASS = "test";
+   static final String PASS = "root@123";
    Connection conn = null;
    Statement stmt = null;
    Statement stmt2 = null;
@@ -47,18 +47,20 @@ public class AccessDB {
 		   sql = "INSERT INTO message (user_id, text, origin_loc_latitude, origin_loc_longitude, views, is_pinned, creation_time, flight_number) VALUES (";
 		   
 		   //sql += msg.getMessageId() + ",";
-		   if (userId != msg.getUserId())
-			   System.out.println("\nERROR: addMessage(): User id mismatch!! Roshan.\n");
-		   sql += "'" + msg.getUserId() + "',";
+		   
+		   sql += "'" + userId + "',";
 		   sql += "'" + msg.getText() + "',";
 		   sql += "'" + msg.getOriginLocation().getLatitude() + "',";
 		   sql += "'" + msg.getOriginLocation().getLongitude() + "',";
+		   sql += "'" + msg.getCurrentLocation().getLatitude() + "',";
+		   sql += "'" + msg.getCurrentLocation().getLongitude() + "',";
 		   
 		   sql += msg.getViews() +  ",";
 	       sql += msg.getPinned() +  ",";	//CHECK
 	       sql += "'" + msg.getCreationTime() + "',";
-	       sql += "'" + msg.getFlightNumber() + "'";
-										   
+	       sql += "'" + msg.getFlightNumber() + "',";
+	       sql += "'" + msg.getLastUpdationTime() + "'";
+	       
 		   sql += ");";
 		   stmt.executeUpdate(sql);
 	   }catch(SQLException se){
@@ -76,9 +78,8 @@ public class AccessDB {
 	   String sql;
 	   try {
 		   sql = "INSERT INTO comment (user_id, message_id, text, origin_loc_latitude, origin_loc_longitude, creation_time) VALUES (";
-		   if (userId != comment.getUserId())
-			   System.out.println("\nERROR: addComment(): User id mismatch!! Roshan.\n");
-		   sql += "'" + comment.getUserId() + "',";
+		   
+		   sql += "'" + userId + "',";
 		   sql += messageId + ",";
 		   sql += "'" + comment.getText() + "',";
 		   sql += "'" + comment.getOriginLocation().getLatitude() + "',";
@@ -185,6 +186,7 @@ public class AccessDB {
 			   msg.setPinned(rs.getBoolean("is_pinned"));
 			   msg.setCreationTime(rs.getString("creation_time"));
 			   msg.setFlightNumber(rs.getString("flight_number"));
+			   msg.setLastUpdationTime(rs.getLong("last_updated"));
 			   
 			   msgList.add(msg);
 		   }
@@ -230,12 +232,13 @@ public class AccessDB {
 		   + "current_loc_latitude <= CAST('" + maxLatitude + "' AS DECIMAL(18, 6)) "
 		   + " AND current_loc_latitude >= CAST('" + minLatitude + "' AS DECIMAL(18, 6)) "
 		   + " AND current_loc_longitude <= CAST('" + rightLongitude + "' AS DECIMAL(18, 6)) "
-		   + " AND current_loc_longitude >= CAST('" + leftLongitude + "' AS DECIMAL(18, 6)) ";
+		   + " AND current_loc_longitude >= CAST('" + leftLongitude + "' AS DECIMAL(18, 6)); ";
 		   ResultSet rs = stmt.executeQuery(sql);
 		   TweetMessage msg = new TweetMessage();
 		   while(rs.next()){
 			   //Retrieve by column name
 			   msg.setMessageId(rs.getInt("message_id"));
+			   msg.setUserId(rs.getString("user_id"));
 			   msg.setText(rs.getString("text"));
 			   msg.setOriginLocation(new Location(rs.getFloat("origin_loc_latitude"), rs.getFloat("origin_loc_longitude")));
 			   msg.setCurrentLocation(new Location(rs.getFloat("current_loc_latitude"), rs.getFloat("current_loc_longitude")));
