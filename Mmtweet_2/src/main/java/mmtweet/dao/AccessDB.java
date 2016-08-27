@@ -104,8 +104,10 @@ public class AccessDB {
 	   try {
 		   sql = "SELECT * FROM message WHERE user_id='" + userId + "';";
 		   ResultSet rs = stmt.executeQuery(sql);
-		   TweetMessage msg = new TweetMessage();
+		   TweetMessage msg = null;
 		   while(rs.next()){
+		       
+		       msg=new TweetMessage();
 			   //Retrieve by column name
 			   msg.setMessageId(rs.getInt("message_id"));
 			   msg.setUserId(rs.getString("user_id"));
