@@ -145,6 +145,7 @@ public class AccessDB {
 		   ResultSet rs = stmt.executeQuery(sql);
 		   TweetMessage msg = null;
 		   while(rs.next()){
+
 			   msg = new TweetMessage();
 			   inner_sql = "SELECT * FROM message WHERE message_id=" + rs.getInt("message_id") + ";";
 			   inner_rs = stmt2.executeQuery(inner_sql);
@@ -181,6 +182,7 @@ public class AccessDB {
 		   ResultSet rs = stmt.executeQuery(sql);
 		   TweetMessage msg = null;
 		   while(rs.next()){
+			   
 			   msg = new TweetMessage();
 			   //Retrieve by column name
 			   msg.setMessageId(rs.getInt("message_id"));
@@ -242,6 +244,7 @@ public class AccessDB {
 		   ResultSet rs = stmt.executeQuery(sql);
 		   TweetMessage msg = null;
 		   while(rs.next()){
+
 			   msg = new TweetMessage();
 			   //Retrieve by column name
 			   msg.setMessageId(rs.getInt("message_id"));
