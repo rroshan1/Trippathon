@@ -5,7 +5,7 @@ import com.javadocmd.simplelatlng.LatLng;
 
 public class Location {
 	@JsonIgnore
-	private LatLng latlng;
+	private LatLng latlng = LatLng.random();
 
 	private double latitude;
 	private double longitude;
@@ -15,46 +15,67 @@ public class Location {
 	
 	public Location()
 	{
-		latlng = LatLng.random();
 	}
 
-	public Location(String latitudeStr, String longitudeStr)
+	public Location(double latitude, double longitude)
 	{
+		latlng.setLatitudeLongitude(latitude, longitude);
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+		latlng.setLatitudeLongitude(this.latitude, this.longitude);
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+		latlng.setLatitudeLongitude(this.latitude, this.longitude);
+	}
+
+	public String getLatitudeStr() {
+		return latitudeStr;
+	}
+
+	public void setLatitudeStr(String latitudeStr) {
+		this.latitudeStr = latitudeStr;
 		try
 		{
-			this.latitudeStr = latitudeStr;
 			this.latitude = Double.parseDouble(latitudeStr);
 		}
 		catch (Exception e)
 		{
 			this.latitude = 0;
 		}
+		latlng.setLatitudeLongitude(this.latitude, this.longitude);
+	}
+
+	public String getLongitudeStr() {
+		return longitudeStr;
+	}
+
+	public void setLongitudeStr(String longitudeStr) {
+		this.longitudeStr = longitudeStr;
 		try
 		{
-			this.longitudeStr = longitudeStr;
 			this.longitude = Double.parseDouble(longitudeStr);
 		}
 		catch(Exception e)
 		{
 			this.longitude = 0;
 		}
-		latlng = new LatLng(latitude, longitude);
-	}
-	
-	public Location(double latitude, double longitude)
-	{
-		latlng = new LatLng(latitude, longitude);
-		this.latitude = latitude;
-		this.longitude = longitude;
+		latlng.setLatitudeLongitude(latitude, longitude);
 	}
 
-	public double getLatitude() {
-		return this.latitude;
-	}
-	public double getLongitude() {
-		return this.longitude;
-	}
-	
 	public LatLng getLatLng()
 	{
 		return this.latlng;
