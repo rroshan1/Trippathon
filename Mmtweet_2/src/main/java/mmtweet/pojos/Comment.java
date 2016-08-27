@@ -5,7 +5,7 @@ public class Comment {
 	private String userId;
 	private String text;
 	private Location originLocation;
-	private String creationTime;
+	private long creationTime=0;
 
 	public String getCommentId() {
 		return commentId;
@@ -31,16 +31,13 @@ public class Comment {
 	public void setOriginLocation(Location originLocation) {
 		this.originLocation = originLocation;
 	}
-	public String getCreationTime() {
+	public long getCreationTime() {
 		return creationTime;
 	}
-	public void setCreationTime(String creationTime) {
+	public void setCreationTime(long creationTime) {
 		this.creationTime = creationTime;
 	}
-	public void setOriginLocation(String string) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	
 	
 }
