@@ -2,6 +2,7 @@ package com.javacodegeeks.enterprise.rest.jersey;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
@@ -121,13 +122,22 @@ public class HelloWorldREST {
 	    @Path("/startUpdateLocationService")
 	    public BaseResponse startUpdateLocationService()
 	    {
-	    	if (executorService.isTerminated())
-	    	{
-	    		System.out.println("inside startUpdateLocationService; going to start UpdateMessageLocationService");
-	    		executorService.submit(new UpdateMessageLocationService());
-	    		return new BaseResponse(true);
-	    	}
-	    	return new BaseResponse(false);
+//	    	if (executorService.isTerminated() || executorService.isShutdown())
+//	    	{
+	    	
+    		System.out.println("inside startUpdateLocationService; going to start UpdateMessageLocationService");
+    		executorService.submit(new UpdateMessageLocationService());
+    		try {
+				executorService.awaitTermination(3, TimeUnit.SECONDS);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			}
+    		return new BaseResponse(true);
+    		
+//	    	}
+//	    	return new BaseResponse(false);
 	    }
 
 	    @GET
