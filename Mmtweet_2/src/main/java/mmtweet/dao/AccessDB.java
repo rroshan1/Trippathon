@@ -106,6 +106,8 @@ public class AccessDB {
 		   ResultSet rs = stmt.executeQuery(sql);
 		   TweetMessage msg = null;
 		   while(rs.next()){
+		       
+		       msg=new TweetMessage();
 			   //Retrieve by column name
 			   msg = new TweetMessage();
 			   msg.setMessageId(rs.getInt("message_id"));
