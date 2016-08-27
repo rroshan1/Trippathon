@@ -10,11 +10,11 @@ import mmtweet.pojos.Location;
 public class AccessDB {
    // JDBC driver name and database URL
    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-   static final String DB_URL = "jdbc:mysql://localhost/trippathon";
+   static final String DB_URL = "jdbc:mysql://localhost:3306/connector_new";
 
    //  Database credentials
    static final String USER = "root";
-   static final String PASS = "root@123";
+   static final String PASS = "test";
    Connection conn = null;
    Statement stmt = null;
    Statement stmt2 = null;
