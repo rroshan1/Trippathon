@@ -74,6 +74,7 @@ public class UpdateMessageLocationService implements Callable<String> {
 		System.out.println("deltaLat="+deltaLat+",deltaLng="+deltaLng+",distance="+distance+",currentTime="+currentTime+",lastUpdationTime="+lastUpdationTime);
 		RectangularWindow window = new RectangularWindow(currentLocation.getLatLng(), deltaLat, deltaLng, MmtweetConstants.LIVE_MESSAGES_DISTANCE_UNIT);
 
+		System.out.println("window corners window.getMaxLatitude()=" + window.getMaxLatitude() + ",window.getMinLatitude()=" + window.getMinLatitude() + ",window.getRightLongitude()="+window.getRightLongitude() + ",window.getLeftLongitude()="+window.getLeftLongitude());
 		//based on direction do get one corner of the rectangle
 		double updatedLat = currentLocation.getLatitude();
 		double updatedLong = currentLocation.getLongitude();
@@ -86,6 +87,9 @@ public class UpdateMessageLocationService implements Callable<String> {
 		else if (MmtweetConstants.WIND_DIRECTION == MmtweetConstants.WindDirection.W)
 			updatedLong = window.getLeftLongitude();
 
+		updatedLat = currentLocation.getLatitude() * 1.00005;
+		updatedLong = currentLocation.getLongitude() * 1.00005;
+		
 		System.out.println("updatedLat="+updatedLat + ",updatedLong="+updatedLong);
 		return new Location(updatedLat, updatedLong);
 	}
