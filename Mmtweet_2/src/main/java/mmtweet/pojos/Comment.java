@@ -1,11 +1,14 @@
 package mmtweet.pojos;
 
+import mmtweet.pojos.vo.MmtweetConstants;
+
 public class Comment {
 	private String commentId;
 	private String userId;
 	private String text;
 	private Location originLocation;
 	private long creationTime=0;
+	private String creationTimeStr;
 
 	public String getCommentId() {
 		return commentId;
@@ -36,8 +39,13 @@ public class Comment {
 	}
 	public void setCreationTime(long creationTime) {
 		this.creationTime = creationTime;
+		setCreationTimeStr(MmtweetConstants.getDateInString(this.creationTime));
 	}
-	
-	
-	
+
+	public String getCreationTimeStr() {
+		return creationTimeStr;
+	}
+	public void setCreationTimeStr(String creationTimeStr) {
+		this.creationTimeStr = creationTimeStr;
+	}
 }
